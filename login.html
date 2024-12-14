@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión - Colegio DR. Ernesto Guevara</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="login-container" class="login-container">
+        <!-- Logo del Colegio -->
+        <div class="container">
+            <img src="/images/5db847a4-b675-4622-bafb-a60f5cd674be.png" alt="Logo del Colegio" class="logo">
+        </div>
+        
+        <!-- Sección de Inicio de Sesión -->
+        <div id="login-section">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm" action="/login" method="POST" novalidate>
+                <!-- Nombre de Usuario -->
+                <div class="input-group">
+                    <i class="bx bx-user input-icon"></i>
+                    <label for="username">Nombre de Usuario:</label>
+                    <input type="text" id="username" name="username" placeholder="Ingresa tu nombre de usuario" required>
+                </div>
+                <!-- Correo Electrónico -->
+                <div class="input-group">
+                    <i class="bx bx-envelope input-icon"></i>
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="input-group">
+                    <i class="bx bx-lock input-icon"></i>
+                    <label for="password">Contraseña:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                        <button type="button" onclick="togglePasswordVisibility('password')" class="password-toggle" aria-label="Mostrar/Ocultar contraseña">👁️</button>
+                    </div>
+                </div>
+
+                <!-- Selección de Rol -->
+                <div class="input-group">
+                    <i class="bx bx-id-card input-icon"></i>
+                    <label for="role">Rol:</label>
+                    <select id="role" name="role" required>
+                        <option value="" disabled selected>Selecciona tu rol</option>
+                        <option value="estudiante">Estudiante</option>
+                        <option value="profesor">Profesor</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+            
+                <!-- Botón de Envío -->
+                <button type="submit" class="login-btn">Iniciar Sesión</button>
+                <p id="error-message" class="error-message"></p>
+            </form>
+            
+            <!-- Enlace para cambiar al formulario de registro -->
+            <div class="switch-form">
+                <p>¿No tienes una cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a></p>
+            </div>
+        </div>
+
+        <!-- Sección de Registro -->
+        <div id="register-section" style="display: none;">
+            <h2>Registro</h2>
+            <form id="registerForm" action="/register" method="POST" novalidate>
+                <!-- Campos comunes -->
+                <div class="input-group">
+                    <i class="bx bx-user input-icon"></i>
+                    <label for="regUsername">Nombre de Usuario:</label>
+                    <input type="text" id="reg-username" name="username" placeholder="Elige un nombre de usuario" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="bx bx-envelope input-icon"></i>
+                    <label for="regEmail">Correo Electrónico:</label>
+                    <input type="email" id="reg-email" name="email" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="bx bx-lock input-icon"></i>
+                    <label for="reg-password">Contraseña:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="reg-password" name="password" placeholder="Elige una contraseña" required>
+                        <button type="button" onclick="togglePasswordVisibility('reg-password')" class="password-toggle" aria-label="Mostrar/Ocultar contraseña">👁️</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <i class="bx bx-id-card input-icon"></i>
+                    <label for="regRole">Rol:</label>
+                    <select id="reg-role" name="role" required onchange="toggleRoleFields()">
+                        <option value="" disabled selected>Selecciona tu rol</option>
+                        <option value="estudiante">Estudiante</option>
+                        <option value="profesor">Profesor</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <!-- Campos específicos para estudiantes -->
+                <div id="estudianteFields" class="role-fields" style="display: none;">
+                    <div class="input-group">
+                        <label for="nombreEstudiante">Nombre:</label>
+                        <input type="text" id="nombreEstudiante" name="nombreEstudiante" placeholder="Ingresa tu nombre" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="apellidoEstudiante">Apellido:</label>
+                        <input type="text" id="apellidoEstudiante" name="apellidoEstudiante" placeholder="Ingresa tu apellido" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="grado">Grado:</label>
+                        <select id="grado" name="grado">
+                            <option value="" disabled selected>Selecciona el grado</option>
+                            <option value="1">1° Grado</option>
+                            <option value="2">2° Grado</option>
+                            <option value="3">3° Grado</option>
+                            <option value="4">4° Grado</option>
+                            <option value="5">5° Grado</option>
+                            <option value="6">6° Grado</option>
+                            <option value="7">7° Grado</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="seccion">Sección:</label>
+                        <select id="seccion" name="seccion">
+                            <option value="" disabled selected>Selecciona la sección</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Campos específicos para profesores -->
+                <div id="profesorFields" class="role-fields" style="display: none;">
+                    <div class="input-group">
+                        <label for="profNombre">Nombre:</label>
+                        <input type="text" id="profNombre" name="nombre" placeholder="Ingresa tu nombre" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="profApellido">Apellido:</label>
+                        <input type="text" id="profApellido" name="apellido" placeholder="Ingresa tu apellido" required>
+                    </div>
+                </div>
+
+                <!-- Botón de Registro -->
+                <button type="submit" class="register-btn">Registrarse</button>
+            </form>
+
+            <!-- Enlace para volver al formulario de inicio de sesión -->
+            <div class="switch-form">
+                <p>¿Ya tienes una cuenta? <a href="#" onclick="showLoginForm()">Inicia sesión aquí</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar contraseña
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            if (input) {
+                input.type = input.type === 'password' ? 'text' : 'password';
+            }
+        }
+
+        // Función para mostrar campos específicos según el rol
+        function toggleRoleFields() {
+            const role = document.getElementById('reg-role').value;
+            const estudianteFields = document.getElementById('estudianteFields');
+            const profesorFields = document.getElementById('profesorFields');
+
+            if (estudianteFields) {
+                estudianteFields.style.display = role === 'estudiante' ? 'block' : 'none';
+            }
+            if (profesorFields) {
+                profesorFields.style.display = role === 'profesor' ? 'block' : 'none';
+            }
+        }
+
+        // Función para mostrar mensajes
+        function showMessage(message, isError = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `alert ${isError ? 'alert-error' : 'alert-success'}`;
+            messageDiv.textContent = message;
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '20px';
+            messageDiv.style.left = '50%';
+            messageDiv.style.transform = 'translateX(-50%)';
+            messageDiv.style.padding = '15px';
+            messageDiv.style.borderRadius = '5px';
+            messageDiv.style.backgroundColor = isError ? '#ff4444' : '#44ff44';
+            messageDiv.style.color = '#fff';
+            messageDiv.style.zIndex = '1000';
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            
+            try {
+                const response = await fetch('http://localhost:3002/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ 
+                        username,
+                        email, 
+                        password,
+                        role 
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Error en el servidor');
+                }
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Login exitoso
+                    window.location.href = 'index.html';
+                } else {
+                    // Mostrar mensaje de error
+                    document.getElementById('error-message').textContent = data.message || 'Error en el inicio de sesión';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('error-message').textContent = error.message || 'Error al conectar con el servidor';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                username: document.getElementById('reg-username').value,
+                email: document.getElementById('reg-email').value,
+                password: document.getElementById('reg-password').value,
+                role: document.getElementById('reg-role').value,
+                nombre: '',
+                apellido: ''
+            };
+
+            // Agregar campos específicos según el rol
+            if (formData.role === 'estudiante') {
+                const nombreEstudiante = document.getElementById('nombreEstudiante');
+                const apellidoEstudiante = document.getElementById('apellidoEstudiante');
+                const grado = document.getElementById('grado');
+                const seccion = document.getElementById('seccion');
+
+                if (nombreEstudiante) formData.nombre = nombreEstudiante.value;
+                if (apellidoEstudiante) formData.apellido = apellidoEstudiante.value;
+                if (grado) formData.grado = grado.value;
+                if (seccion) formData.seccion = seccion.value;
+            } else if (formData.role === 'profesor') {
+                const profNombre = document.getElementById('profNombre');
+                const profApellido = document.getElementById('profApellido');
+
+                if (profNombre) formData.nombre = profNombre.value;
+                if (profApellido) formData.apellido = profApellido.value;
+            }
+
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showMessage(data.message);
+                    // Esperar 2 segundos y luego mostrar el formulario de login
+                    setTimeout(() => {
+                        showLoginForm();
+                    }, 2000);
+                } else {
+                    showMessage(data.message, true);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('Error al registrar usuario', true);
+            }
+        });
+
+        // Función para mostrar el formulario de registro
+        function showRegisterForm() {
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('register-section').style.display = 'block';
+        }
+
+        // Función para mostrar el formulario de login
+        function showLoginForm() {
+            document.getElementById('register-section').style.display = 'none';
+            document.getElementById('login-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

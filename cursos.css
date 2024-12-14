@@ -1,0 +1,67 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Fondo neutral para resaltar el contenido */
+    color: #333; /* Texto oscuro para mayor legibilidad */
+}
+
+/* Contenedor de la barra de búsqueda */
+.search-bar {
+    background-color: #ff0000; /* Rojo vibrante como color principal */
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar la barra */
+}
+
+.search-bar .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center; /* Centra los elementos */
+    align-items: center;
+}
+
+/* Lista de enlaces */
+.search-bar ul {
+    list-style: none; /* Elimina los estilos de lista */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Disposición horizontal */
+    gap: 15px; /* Espaciado entre elementos */
+}
+
+.search-bar li {
+    margin: 0; /* Resetea el margen */
+}
+
+.search-bar a {
+    color: #ffffff; /* Texto blanco para contraste */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 1.2rem; /* Tamaño del texto */
+    font-weight: bold; /* Texto en negrita */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+/* Efectos al pasar el mouse */
+.search-bar a:hover {
+    background-color: #000000; /* Negro para el efecto hover */
+    transform: scale(1.05); /* Ligero aumento de tamaño */
+}
+
+/* Títulos principales */
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    color: #ff0000; /* Rojo para resaltar el título */
+    margin: 20px 0;
+}
+
+p {
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+    margin: 10px 0;
+}

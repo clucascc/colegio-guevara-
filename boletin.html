@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletín de Notas</title>
+    <link rel="stylesheet" href="/css/Boletín.css">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="/js/auth.js"></script>
+    <script src="/js/notas-api.js"></script>
+</head>
+<body>
+    <div class="container mt-5" id="contenidoProfesor">
+        <div class="row">
+            <div class="col-12">
+                <div id="errorMessage" class="alert alert-danger" style="display: none;">
+                    <strong>Acceso Denegado:</strong> Solo los profesores pueden acceder a esta página.
+                </div>
+                <h2 class="text-center mb-4">Gestión de Boletines</h2>
+                <div class="report-card-container">
+                    <h2>Boletín de Notas</h2>
+
+                    <div class="student-info">
+                        <label for="id_estudiante">ID Estudiante:</label>
+                        <input type="text" id="id_estudiante" class="student-input" placeholder="Ingrese el ID del estudiante">
+                        
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" class="student-input" placeholder="Ingrese el nombre del estudiante">
+                        
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" id="apellido" class="student-input" placeholder="Ingrese el apellido del estudiante">
+                    </div>
+
+                    <table id="notas-table">
+                        <thead>
+                            <tr>
+                                <th>ID Materia</th>
+                                <th>Asignatura</th>
+                                <th>Primer Trimestre</th>
+                                <th>Segundo Trimestre</th>
+                                <th>Tercer Trimestre</th>
+                                <th>Promedio</th>
+                                <th>Comentario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-materia-id="1">
+                                <td>1</td>
+                                <td>Matemáticas</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="2">
+                                <td>2</td>
+                                <td>Inglés</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="3">
+                                <td>3</td>
+                                <td>Autogestión</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="4">
+                                <td>4</td>
+                                <td>Hardware</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="5">
+                                <td>5</td>
+                                <td>Programación</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="6">
+                                <td>6</td>
+                                <td>Asistencia</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="7">
+                                <td>7</td>
+                                <td>Marco Jurídico</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="8">
+                                <td>8</td>
+                                <td>Redes</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                            <tr data-materia-id="9">
+                                <td>9</td>
+                                <td>Prácticas</td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="1T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="2T"></td>
+                                <td><input type="number" min="0" max="10" step="0.1" class="grade-input" data-periodo="3T"></td>
+                                <td class="promedio">-</td>
+                                <td><input type="text" class="comment-input"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"><strong>Promedio</strong></td>
+                                <td id="promedio1">-</td>
+                                <td id="promedio2">-</td>
+                                <td id="promedio3">-</td>
+                                <td>Promedio Final: <span id="promedioFinal">-</span></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <div class="buttons-container">
+                        <button onclick="calcularPromedios()" class="action-button">Calcular Promedios</button>
+                        <button onclick="guardarNotas()" class="action-button">Guardar Notas</button>
+                        <button onclick="cargarNotas()" class="action-button">Cargar Notas</button>
+                        <button onclick="window.print()" class="action-button">Imprimir Boletín</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-light mt-5 py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Verificar sesión y rol al cargar la página
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('http://localhost:3002/api/auth/session-status', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+                
+                if (!data.isAuthenticated) {
+                    window.location.href = '/login';
+                    return;
+                }
+
+                if (data.role !== 'profesor') {
+                    document.getElementById('errorMessage').style.display = 'block';
+                    return;
+                }
+
+                // Si el usuario es profesor, mostrar el contenido
+                document.getElementById('contenidoProfesor').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                window.location.href = '/login';
+            }
+        });
+
+        function calcularPromedios() {
+            const filas = document.querySelectorAll('tbody tr');
+            let sumas = [0, 0, 0];
+            let contadores = [0, 0, 0];
+            
+            filas.forEach(fila => {
+                const notas = fila.querySelectorAll('.grade-input');
+                notas.forEach((nota, index) => {
+                    if (nota.value !== '') {
+                        sumas[index] += parseFloat(nota.value);
+                        contadores[index]++;
+                    }
+                });
+            });
+
+            // Calcular promedios por trimestre
+            const promedios = sumas.map((suma, index) => 
+                contadores[index] > 0 ? (suma / contadores[index]).toFixed(2) : '-'
+            );
+
+            // Mostrar promedios
+            document.getElementById('promedio1').textContent = promedios[0];
+            document.getElementById('promedio2').textContent = promedios[1];
+            document.getElementById('promedio3').textContent = promedios[2];
+
+            // Calcular promedio final
+            const promedioFinal = promedios
+                .filter(p => p !== '-')
+                .map(p => parseFloat(p))
+                .reduce((a, b) => a + b, 0) / promedios.filter(p => p !== '-').length;
+
+            document.getElementById('promedioFinal').textContent = 
+                isNaN(promedioFinal) ? '-' : promedioFinal.toFixed(2);
+        }
+
+        async function guardarNotas() {
+            const alumnoId = document.getElementById('id_estudiante').value;
+            if (!alumnoId) {
+                alert('Por favor, ingrese el ID del estudiante');
+                return;
+            }
+
+            const notas = [];
+            const notasInputs = document.querySelectorAll('.grade-input');
+            
+            notasInputs.forEach(input => {
+                if (input.value) {
+                    const materiaId = input.closest('tr').getAttribute('data-materia-id');
+                    const periodo = input.getAttribute('data-periodo').charAt(0); // Solo tomamos el número del trimestre
+                    notas.push({
+                        materia_id: parseInt(materiaId),
+                        nota: parseFloat(input.value),
+                        periodo: periodo
+                    });
+                }
+            });
+
+            if (notas.length === 0) {
+                alert('Por favor, ingrese al menos una nota');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3002/api/notas/guardar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        estudiante_id: parseInt(alumnoId),
+                        notas: notas
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Notas guardadas correctamente');
+                    // Limpiar los campos después de guardar
+                    notasInputs.forEach(input => input.value = '');
+                    document.getElementById('id_estudiante').value = '';
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('apellido').value = '';
+                } else {
+                    throw new Error(data.message || 'Error al guardar las notas');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al guardar las notas: ' + error.message);
+            }
+        }
+
+        async function cargarNotas() {
+            const id_estudiante = document.getElementById('id_estudiante').value;
+            if (!id_estudiante) {
+                alert('Por favor, ingrese el ID del estudiante');
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:3002/api/notas/${id_estudiante}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.notas) {
+                    // Limpiar las notas existentes
+                    const inputs = document.querySelectorAll('.grade-input, .comment-input');
+                    inputs.forEach(input => input.value = '');
+
+                    // Cargar las nuevas notas
+                    data.notas.forEach(nota => {
+                        const fila = document.querySelector(`tr[data-materia-id="${nota.materia_id}"]`);
+                        if (fila) {
+                            const input = fila.querySelector(`input[data-periodo="${nota.periodo}T"]`);
+                            if (input) {
+                                input.value = nota.nota;
+                            }
+                        }
+                    });
+
+                    // Actualizar los promedios
+                    calcularPromedios();
+                    alert('Notas cargadas correctamente');
+                } else {
+                    alert(data.message || 'No se encontraron notas para este estudiante');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al cargar las notas: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
